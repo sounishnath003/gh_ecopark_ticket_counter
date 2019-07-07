@@ -1,0 +1,19 @@
+
+
+      <%= simple_form_for(@ticket) do |f| %>
+        <%= f.error_notification %>
+        <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+        <div class="form-inputs p-6 bg--100 rounded-lg ">
+          <div class="p-3 mb-4"><%= f.input :date, required: true, ampm: true %></div>
+          <div class="p-3 mb-4"><%= f.input :persons, required: true %></div>
+          <div class="p-3 mb-4"><%= f.input :price, disabled: true %></div>
+          <div class="p-3 mb-4"><%= f.input :motorcycle_parking %></div>
+
+        <div class="form-actions text-right">
+          <%= f.button :submit, class: "bg-indigo-700 px-12 py-2 rounded text-white"  %>
+        </div>
+
+        </div>
+      <% end %>
+

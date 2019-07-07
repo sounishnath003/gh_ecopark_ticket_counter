@@ -1,0 +1,3 @@
+class Price < ApplicationRecord
+
+end

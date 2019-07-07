@@ -1,0 +1,90 @@
+<p id="notice"><%= notice %></p>
+
+<%= render  "home/header" %>
+
+<div class="max-w-5xl m-auto mt-12 p-6 shadow-xl rounded-lg">
+
+  <div class="w-full bg-gray-100 p-8 mb-6 rounded-lg">
+      <h1 class="text-indigo-600 text-2xl mb-3">All Tickets</h1>
+      <div class="flex flex-row m-auto mb-2">
+        <div class="text-xl font-bold mr-3">Visitors visited </div>
+        <div class="text-indigo-600 text-2xl"> <%= @tickets.sum(:persons) %> 🚩</div>
+      </div >
+      
+      <div class="flex flex-row m-auto mb-4">
+        <div class="text-xl font-bold mr-3">Gross Income </div>
+        <div class="text-indigo-600 text-2xl"><%= number_to_currency @tickets.sum(:sub_total), :unit => "₹" %> ⬆</div>
+      </div>
+
+        <div class="p-1">
+              <%= search_form_for @search do |f| %>
+                <div class=" flex flex-row justify-center">
+                    <div class="text-center">
+                      <%= f.label :memo_no_matches_all, "Memo_no Search", class: "font-bold" %>
+                      <%= f.search_field :memo_no_matches_all %>
+                    </div>
+                    <div class="flex justify-between">
+                     <div class="text-center">
+                        <%= f.label :date_gteq, "Date between" , class: "font-bold" %>
+                        <%= f.search_field :date_gteq %>
+                     </div>
+                      <div class="text-center">
+                        <%= f.label :date_lteq, " and" , class: "font-bold" %>
+                        <%= f.search_field :date_lteq %>
+                      </div>
+                      <%= f.submit "Search", class: "ml-3 bg-indigo-700 text-white py-1 px-6 m-auto" %>
+                    </div>
+                </div>
+              <% end %>
+        </div>
+  </div>
+
+
+  <br>
+
+      <div class="mb-6">
+        <%= link_to 'New Ticket', new_ticket_path, class: "px-12 py-3 rounded bg-indigo-600 text-white" %>
+      </div>
+   <br> 
+
+
+    <div class="px-3 w-full rounded md:max-w-5xl m-auto  py-4 flex-col flex-wrap md:flex-row flex justify-center">
+
+    
+  
+    <div class="flickr_pagination mb-8">
+      <div class="flickr_info mb-3">
+        <%= page_entries_info @tickets %>
+      </div>
+      <%= will_paginate @tickets, :container => false %>
+  </div>
+
+
+
+        <table class="w-full text-md bg-white shadow rounded-lg mb-4">
+            <tbody>
+            <tr class="border-b">
+                      <th class="text-left p-3 px-5">Date</th>
+                      <th class="text-left p-3 px-5">Time</th>
+                      <th class="text-left p-3 px-5">Person(s)</th>
+                      <th class="text-left p-3 px-5">Motorcycle parking</th>
+                      <th class="text-left p-3 px-5">Ticket Price</th>
+                      <th class="text-left p-3 px-5">Sub Total</th>
+                      <th colspan="4"></th>
+            </tr>
+
+              <% @tickets.each do |ticket| %>
+                  <tr class="border-b hover:bg-orange-100 bg-gray-100">
+                      <td class="p-3 mb-2 text-blue-400 px-5"><%= link_to ticket.date.strftime("%A, %b %d %Y"), ticket_path(ticket) %></td>
+                      <td class="p-3 mb-2 px-5"><%= ticket.date.strftime("%I:%M %p") %></td>
+                      <td class="p-3 mb-2 px-5"><%= ticket.persons %></td>
+                      <td class="p-3 mb-2 px-5"><%= ticket.motorcycle_parking ? "YES" : "No Parking Charge" %></td>
+                      <td class="p-3 mb-2 px-5"><%= ticket.price %></td>
+                      <td class="p-3 mb-2 px-5"><%= ticket.sub_total %></td>
+                  </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,8 @@
+
+<div class="max-w-3xl bg--300 m-auto mt-16 p-10 shadow-lg rounded">
+        <h1 class="text-2xl m-3 text-indigo-600">New Ticket</h1>
+
+        <%= render 'form', ticket: @ticket %>
+
+        <div class="mt-8"><%= link_to 'BACK', tickets_path, class:"px-8 hover:shadow-lg py-2 rounded bg-yellow-400 text-black" %></div>
+</div>

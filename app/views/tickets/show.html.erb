@@ -1,0 +1,51 @@
+<div class="w-full h-screen bg-show p-10">
+      <div class="max-w-sm  p m-auto bg-white shadow-xl p-8 rounded-lg">
+      <div class="text-black text-2xl tracking-wide mb-0">Ghatal Eco Tourism Park</div>
+      <div class="text-black text-sm tracking-tight mb-0">under Ghatal Panchayat Samiti</div>
+      <div class="text-black text-sm tracking-tight mb-3">Harisinghpur, Ghatal, 721212</div>
+        <div class="flex flex-wrap flex-row mt-4 justify-between">
+          <div class="text-black text-2xl tracking-wide">INVOICE</div>
+          <div class="text-grey tracking-wide text-2xl">#
+          <%= @ticket.memo_no %>
+          </div>
+        </div>
+        <div class="mt-4 font-mono tracking-wide border-dashed text-grey-light border-b border-grey pb-6">
+          <%= @ticket.date.strftime("%d/%m/%Y, %I:%M %p") %>
+        </div>
+        <div class="flex flex-wrap flex-row items-center mt-6 mb-5 justify-between">
+          <div class="text-grey traking-normal text-sm">Person(s)</div>
+          <div class="text-grey traking-normal text-sm">Ticket price</div>
+          <div class="text-grey traking-normal text-sm">TOTAL</div>
+        </div>
+
+        <div class="flex flex-wrap flex-row items-center mt-8 mb-3 justify-between">
+          <div class="text-black font-bold traking-normal text-lg">
+            <%= @ticket.persons %>
+          </div>
+          <div class="text-black font-bold traking-normal text-lg"> <%= @ticket.price %> </div>
+          <div class="text-black font-bold traking-normal text-lg"> ₹<%= @ticket.sub_total %> </div>
+        </div>
+
+      <% if @ticket.motorcycle_parking %>
+        
+        <div class="flex flex-wrap flex-row items-center mt-8 mb-3 justify-between">
+          <div class="text-black font-bold traking-normal text-lg">Parking Charge
+            <p class="text-sm text-grey-dark mt-2">(bike/car)</p>
+          </div>
+          <div class="text-black font-bold traking-normal text-lg">5</div>
+          <div class="text-black font-bold traking-normal text-lg">Added</div>
+        </div>
+
+      <% end %>
+
+        <div class="flex flex-wrap flex-row mt-12 pb-6 border-b border-grey border-dashed justify-between">
+          <div class="text-black text-2xl tracking-wide font-bold">Total</div>
+          <div class="text-indigo-dark tracking-wide text-xl"> ₹<%= @ticket.sub_total %> </div>
+        </div>
+
+        <div class="flex flex-wrap mt-8 flex-row justify-end">
+          <%= link_to  "BACK", tickets_path, class: "text-center px-4 bg-white rounded py-2 text-grey-darker mr-12" %>
+          <div class="text-center px-4 bg-white rounded py-2 text-red">PRINT</div>
+        </div>
+      </div>
+    </div>
